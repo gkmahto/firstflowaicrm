@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FirstFlowAI Dashboard - Dark Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0EA5E9", // Electric Blue
+                        "ai-primary": "#8B5CF6", // Bold Purple
+                        "background-obsidian": "#0F172A",
+                        "card-glass": "rgba(30, 41, 59, 0.6)",
+                        "text-light": "#E2E8F0",
+                        "text-muted": "#94A3B8",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .glass-card {
+            background-color: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.1);
+        }
+        .ai-glow {
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background-obsidian font-display text-text-light antialiased overflow-hidden">
+<div class="flex h-screen">
+<aside class="w-64 flex-shrink-0 border-r border-white/5 bg-[#0F172A] flex flex-col z-30">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined fill-1">bolt</span>
+</div>
+<div>
+<h1 class="text-base font-bold leading-none tracking-tight text-text-light">FirstFlowAI</h1>
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest mt-1">Enterprise CRM</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[22px] fill-1">dashboard</span>
+<p class="text-sm font-semibold">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 text-text-muted hover:text-text-light hover:bg-white/5 rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[22px]">group</span>
+<p class="text-sm font-medium">Leads</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 text-text-muted hover:text-text-light hover:bg-white/5 rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+<p class="text-sm font-medium">Calendar</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 text-text-muted hover:text-text-light hover:bg-white/5 rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[22px]">analytics</span>
+<p class="text-sm font-medium">Analytics</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 text-text-muted hover:text-text-light hover:bg-white/5 rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+<p class="text-sm font-medium">Messages</p>
+<span class="ml-auto bg-primary text-white text-[10px] px-1.5 py-0.5 rounded-full">4</span>
+</div>
+</nav>
+<div class="p-4 border-t border-white/5">
+<div class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-light hover:bg-white/5 rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</div>
+<div class="mt-4 p-4 bg-ai-primary/5 rounded-xl border border-ai-primary/20">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-ai-primary text-sm">auto_awesome</span>
+<p class="text-xs font-bold text-ai-primary">AI Optimized</p>
+</div>
+<p class="text-[11px] text-text-muted">Flow optimization active. +14% efficiency detected.</p>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden bg-background-obsidian">
+<header class="h-16 border-b border-white/5 bg-[#0F172A]/80 backdrop-blur-md flex items-center justify-between px-8 z-10">
+<div class="flex items-center gap-6 flex-1">
+<h2 class="text-lg font-bold tracking-tight text-text-light">Main Dashboard</h2>
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted/60 text-xl">search</span>
+<input class="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/40 focus:border-transparent transition-all placeholder-text-muted/40 text-text-light" placeholder="Search leads, pipelines, or analytics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-text-muted hover:bg-white/5 rounded-lg relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-background-obsidian"></span>
+</button>
+<div class="h-8 w-[1px] bg-white/10 mx-2"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right">
+<p class="text-sm font-bold leading-none text-text-light">Alex Morgan</p>
+<p class="text-[11px] text-text-muted mt-1">Sales Manager</p>
+</div>
+<div class="size-10 rounded-full border border-white/10 p-0.5">
+<img alt="User profile" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBztV-8Jk26J8H9oIjsZwVu0O80oyZTzpCvPZDiArC6en_TOfJFHGGpLqVy_VNpLFhgODw-pczBeE5xcy8_0mhOTwkR9bFA7JV3bDlHFwk_Y4O3rSEFP0TsLgKLrRqTkcdJI1milNnfRBgY2YavMxNqtnaORrwwDHh8-dmy8tCB3RHZTqipmptxXNggpWJJ1Q7wm8CteJQi7hN6Qm5RhVCIbvwvZoSFWBc_CUbejq_8f8fxl5kGDOSw2B785DJw5RJjv_839e-SpLY"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-8">
+<div class="grid grid-cols-4 gap-6 mb-8">
+<div class="glass-card p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold uppercase tracking-wider text-text-muted">New Inquiries</p>
+<span class="text-emerald-400 text-xs font-bold bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/20">+12.4%</span>
+</div>
+<p class="text-3xl font-black mt-2 text-text-light">1,284</p>
+<div class="mt-4 h-8 w-full bg-primary/10 rounded-lg flex items-end px-1 gap-1">
+<div class="w-full h-[40%] bg-primary/20 rounded-t-sm"></div>
+<div class="w-full h-[60%] bg-primary/20 rounded-t-sm"></div>
+<div class="w-full h-[50%] bg-primary/20 rounded-t-sm"></div>
+<div class="w-full h-[80%] bg-primary/40 rounded-t-sm"></div>
+<div class="w-full h-[100%] bg-primary/60 rounded-t-sm"></div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold uppercase tracking-wider text-text-muted">Assigned Leads</p>
+<span class="text-text-muted text-xs font-bold bg-white/5 px-2 py-0.5 rounded border border-white/10">Stable</span>
+</div>
+<p class="text-3xl font-black mt-2 text-text-light">84</p>
+<div class="mt-4 h-8 w-full flex items-end px-1 gap-1">
+<div class="w-full h-[70%] bg-white/10 rounded-t-sm"></div>
+<div class="w-full h-[65%] bg-white/10 rounded-t-sm"></div>
+<div class="w-full h-[70%] bg-white/10 rounded-t-sm"></div>
+<div class="w-full h-[68%] bg-white/10 rounded-t-sm"></div>
+<div class="w-full h-[70%] bg-white/10 rounded-t-sm"></div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold uppercase tracking-wider text-text-muted">Needs Follow-up</p>
+<span class="text-rose-400 text-xs font-bold bg-rose-400/10 px-2 py-0.5 rounded border border-rose-400/20">-5.2%</span>
+</div>
+<p class="text-3xl font-black mt-2 text-rose-400">12</p>
+<div class="mt-4 flex gap-2 overflow-hidden h-8 items-center">
+<span class="material-symbols-outlined text-rose-400">priority_high</span>
+<div class="h-1.5 bg-rose-400/20 flex-1 rounded-full overflow-hidden">
+<div class="h-full w-2/3 bg-rose-400"></div>
+</div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold uppercase tracking-wider text-text-muted">Conversion Rate</p>
+<span class="text-primary text-xs font-bold bg-primary/10 px-2 py-0.5 rounded border border-primary/20">+0.8%</span>
+</div>
+<p class="text-3xl font-black mt-2 text-text-light">4.2%</p>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="size-6 rounded-full border-2 border-[#1E293B] bg-primary/60"></div>
+<div class="size-6 rounded-full border-2 border-[#1E293B] bg-primary/40"></div>
+<div class="size-6 rounded-full border-2 border-[#1E293B] bg-primary/20"></div>
+</div>
+<p class="text-[10px] text-text-muted font-bold uppercase tracking-tight">Top Performers</p>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-2xl shadow-sm mb-8">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-xl font-bold tracking-tight text-text-light">Lead Flow Optimization</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-ai-primary text-sm">auto_awesome</span>
+<p class="text-sm text-text-muted">AI-powered visualization of pipeline velocity</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-sm font-semibold text-text-muted bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors">Past 30 Days</button>
+<button class="px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg shadow-lg shadow-primary/30">Real-time</button>
+</div>
+</div>
+<div class="relative h-[240px] w-full">
+<svg class="w-full h-full" fill="none" viewBox="0 0 1000 240" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="flow1" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.1"></stop>
+<stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.6"></stop>
+</linearGradient>
+<linearGradient id="flow2" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.6"></stop>
+<stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.8"></stop>
+</linearGradient>
+<filter id="glow">
+<feGaussianBlur result="coloredBlur" stdDeviation="2.5"></feGaussianBlur>
+<feMerge>
+<feMergeNode in="coloredBlur"></feMergeNode>
+<feMergeNode in="SourceGraphic"></feMergeNode>
+</feMerge>
+</filter>
+</defs>
+<path d="M0 40 C 250 40, 250 120, 500 120" filter="url(#glow)" stroke="url(#flow1)" stroke-opacity="0.8" stroke-width="60"></path>
+<path d="M500 120 C 750 120, 750 80, 1000 80" filter="url(#glow)" stroke="url(#flow2)" stroke-opacity="1" stroke-width="40"></path>
+<path d="M500 120 C 750 120, 750 200, 1000 200" stroke="#334155" stroke-opacity="0.5" stroke-width="20"></path>
+<rect fill="#0EA5E9" height="60" rx="4" width="8" x="0" y="10"></rect>
+<rect fill="#0EA5E9" height="60" rx="4" width="8" x="496" y="90"></rect>
+<rect fill="#8B5CF6" height="40" rx="4" width="8" x="992" y="60"></rect>
+<rect fill="#475569" height="20" rx="4" width="8" x="992" y="190"></rect>
+</svg>
+<div class="absolute inset-0 flex justify-between items-end pb-2 pointer-events-none">
+<div class="text-center">
+<p class="text-[10px] font-bold uppercase tracking-widest text-text-muted">Source</p>
+<p class="text-sm font-bold text-text-light">1,284 Leads</p>
+</div>
+<div class="text-center absolute left-1/2 -translate-x-1/2">
+<p class="text-[10px] font-bold uppercase tracking-widest text-text-muted">Qualified</p>
+<p class="text-sm font-bold text-text-light">412 Active</p>
+</div>
+<div class="text-right flex flex-col gap-12 mb-4">
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-text-muted">Closed Won</p>
+<p class="text-sm font-bold text-ai-primary">54 Deals</p>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-text-muted">Lost/Nurture</p>
+<p class="text-sm font-bold text-text-muted">358 Inactive</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl shadow-sm overflow-hidden">
+<div class="px-8 py-5 border-b border-white/5 flex items-center justify-between">
+<h3 class="text-lg font-bold text-text-light">Priority Lead List</h3>
+<div class="flex items-center gap-4">
+<span class="text-xs text-ai-primary font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">sort</span>
+                            Sorted by AI Priority Score
+                        </span>
+<button class="size-8 flex items-center justify-center rounded-lg hover:bg-white/5 text-text-muted">
+<span class="material-symbols-outlined text-xl">filter_list</span>
+</button>
+</div>
+</div>
+<table class="w-full text-left border-collapse">
+<thead class="bg-white/5">
+<tr>
+<th class="px-8 py-4 text-[11px] font-bold uppercase tracking-widest text-text-muted">Lead Contact</th>
+<th class="px-4 py-4 text-[11px] font-bold uppercase tracking-widest text-text-muted">Source</th>
+<th class="px-4 py-4 text-[11px] font-bold uppercase tracking-widest text-text-muted">Status</th>
+<th class="px-4 py-4 text-[11px] font-bold uppercase tracking-widest text-text-muted text-center">AI Score</th>
+<th class="px-8 py-4 text-[11px] font-bold uppercase tracking-widest text-text-muted text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/[0.03] transition-colors cursor-pointer group">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<img alt="Alex Rivera" class="size-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIcV7K6FivKDTCKU3Ja8O7D5vMXw1HeZh8YK_hqm13muodwAzpmTWxHS19S1Aa2HWxQsi8IMzMqJlpNJn0N8KM8V8jXp0Wp6xsZdSaBSsIRtIc7wU18AJww3ZZuLt-fmajyPF95Vb7l4MoiwD6sQjrr5PLONBenUSIv20YKs36nXb_wpRqEaa0CO5sBb-A3XCWLpMI0fCIeWOu1O1xjfvIJqcS9coHsqebk1KPcLR2Zarphk1NhH0627alWsuFkqdbKrnPel11skI"/>
+<div>
+<p class="text-sm font-bold text-text-light">Alex Rivera</p>
+<p class="text-xs text-text-muted">arivera@tech-flow.io</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">link</span>
+<span class="text-xs font-medium text-text-light">LinkedIn Ads</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-block px-3 py-1 bg-amber-400/10 text-amber-400 text-[10px] font-bold rounded-full uppercase border border-amber-400/20">In Progress</span>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="ai-glow bg-ai-primary text-white text-sm font-black px-3 py-1 rounded-full">94</span>
+</td>
+<td class="px-8 py-4 text-right">
+<button class="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-ai-primary/5 transition-colors cursor-pointer group bg-ai-primary/[0.04] border-l-4 border-ai-primary">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<img alt="Sarah Chen" class="size-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoB74hkGcnh4w_Vy32lNtTuep9fqjB5ufku104IZQJhMZ2tLrGLczFxJCmQiC0fHcyCVMUTwh4XOCE-L1Ljjx2yjfL4cdnGixsjG3Z65z1msLGJsa6xNIo4aahZ4BHh9XTH5M3ci-Q1Iy794hdRo8EZ1wVwwuYBxRtrrMOZo_UzmynyNq6CDQStJKabMQFLQr6kLVJhPvP_7CrkJFVzBTCt8LJIDgRX2QAPWcwqEBeZtr03IjMjdty0bnP_h1DKNTqRAlbpSlVGCM"/>
+<div>
+<p class="text-sm font-bold text-text-light">Sarah Chen</p>
+<p class="text-xs text-text-muted">s.chen@globalinfra.com</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">language</span>
+<span class="text-xs font-medium text-text-light">Organic Web</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-block px-3 py-1 bg-emerald-400/10 text-emerald-400 text-[10px] font-bold rounded-full uppercase border border-emerald-400/20">Qualified</span>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="ai-glow bg-ai-primary text-white text-sm font-black px-3 py-1 rounded-full">92</span>
+</td>
+<td class="px-8 py-4 text-right">
+<button class="text-primary">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/[0.03] transition-colors cursor-pointer group">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<img alt="Marcus Thorne" class="size-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA24Lc1B6Yg8P2cR-TMpPaizlK-CBvf2-tVfnYfgGy-rXWzr5BEGBwp6P0t5Ts--ov8fSxcLPapkQiCTdcMrE5dBjO5j8eQzWgZpqzUCLuupRJ_n6X20I6wQpWIIoCdUQkw26hcWfqYqaPtGtxU16cgygVtShslaOo0qN7PEchVIkmaGk5X-yFKtsHCDi4MAyh3tDw21y3xXYsQzE31MKqkbVis14RlmTLSWospagA8zx9yN5w_DwY66o8Z8gYsrfC5vvoYsuCAWSk"/>
+<div>
+<p class="text-sm font-bold text-text-light">Marcus Thorne</p>
+<p class="text-xs text-text-muted">m.thorne@heavyindustries.net</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-rose-400">mail</span>
+<span class="text-xs font-medium text-text-light">Outbound</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-block px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase border border-primary/20">Contacted</span>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="bg-ai-primary/20 text-ai-primary text-sm font-bold px-3 py-1 rounded-full border border-ai-primary/30">87</span>
+</td>
+<td class="px-8 py-4 text-right">
+<button class="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<aside class="w-80 glass-card border-l border-white/5 z-20 flex flex-col">
+<div class="p-6">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-ai-primary">auto_awesome</span>
+<h4 class="text-sm font-bold uppercase tracking-widest text-ai-primary">AI Insights</h4>
+</div>
+<span class="material-symbols-outlined text-text-muted/30 cursor-help">info</span>
+</div>
+<div class="mb-8">
+<div class="flex items-center gap-4 mb-6">
+<img alt="Selected lead" class="size-14 rounded-xl object-cover ring-2 ring-ai-primary/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7bLUw4RklhWSBRUoFNwekLXIjsARt91xbHBNWnUNaRrVfnfxdHaCm7apEGXpIywYgZamNl1LZtPVQpjYequXUxFld1tuY-HXvIsMHBws3ZiCLjVMGvP3xvIe6eFdvzH1ItkFFLsMqwmT8aKlkL26PXqqJezZF1TE8Pv70lcm0_M1YZmiEkaSWCa9WUWc8M2EiO-_XkAfIeTwT9V5In6bZ6a5u1otYFz_M33xTKM-4xZC0p1QoRtXnCaQVwLhnVsPdRqHZiglKlH4"/>
+<div>
+<p class="text-base font-black text-text-light">Sarah Chen</p>
+<p class="text-xs text-text-muted">Global Infra Group</p>
+</div>
+</div>
+<div class="p-5 bg-ai-primary text-white rounded-xl ai-glow relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-tr from-white/0 to-white/10 opacity-50"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-center mb-1">
+<p class="text-[10px] font-bold uppercase tracking-tight opacity-80">Priority Score</p>
+<span class="material-symbols-outlined text-sm">trending_up</span>
+</div>
+<p class="text-4xl font-black">92%</p>
+<p class="text-[11px] mt-2 opacity-90 leading-relaxed font-medium">High intent detected: user viewed 'Enterprise Pricing' 4 times and downloaded API whitepaper.</p>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<h5 class="text-[10px] font-bold text-text-muted uppercase tracking-widest">Qualification Metrics</h5>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<p class="text-sm font-semibold text-text-muted">Budget Fit</p>
+<p class="text-sm font-bold text-text-light">85%</p>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-ai-primary rounded-full w-[85%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<p class="text-sm font-semibold text-text-muted">Project Timeline</p>
+<p class="text-sm font-bold text-text-light">94%</p>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-ai-primary rounded-full w-[94%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<p class="text-sm font-semibold text-text-muted">Engagement</p>
+<p class="text-sm font-bold text-text-light">78%</p>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-ai-primary rounded-full w-[78%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-10 p-5 rounded-xl border-2 border-dashed border-white/10 bg-white/[0.02]">
+<p class="text-[10px] font-bold text-text-muted mb-4 uppercase tracking-widest">Recommended Action</p>
+<button class="w-full flex items-center justify-between p-3 bg-primary rounded-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all text-left group">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-white/20 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">calendar_add_on</span>
+</div>
+<p class="text-xs font-bold text-white">Schedule Demo</p>
+</div>
+<span class="material-symbols-outlined text-white group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<div class="mt-4 flex items-start gap-2 px-1">
+<span class="material-symbols-outlined text-[14px] text-ai-primary mt-0.5">auto_awesome</span>
+<p class="text-[10px] text-text-muted leading-tight">AI generated personalized invitation draft ready in mailbox.</p>
+</div>
+</div>
+</div>
+<div class="mt-auto p-6 bg-white/[0.03] border-t border-white/5">
+<div class="flex items-center gap-2 text-ai-primary">
+<span class="material-symbols-outlined text-lg animate-pulse">sync</span>
+<p class="text-[10px] font-bold uppercase tracking-widest">Processing Live Signals</p>
+</div>
+</div>
+</aside>
+</div>
+
+</body></html>
